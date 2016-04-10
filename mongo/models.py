@@ -10,6 +10,8 @@ class RideRequest(Document):
 
 
     def __repr__(self):
-        return "%d - %s, from %s @ %s to %s @ %s" % (self.uoid,self.name,self.pickup_addr,self.pickup_time,self.dropoff_addr,self.dropoff_time)
+        pickup_time_str = self.pickup_time.strftime("%I:%M").lstrip("0")
+        dropoff_time_str = self.dropoff_time.strftime("%I:%M").lstrip("0")
+        return "%d - %s, from %s @ %s to %s @ %s" % (self.uoid,self.name,self.pickup_addr,pickup_time_str,self.dropoff_addr,dropoff_time_str)
     def __str__(self):
         return self.__repr__()
