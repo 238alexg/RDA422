@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+            <title>SafeRide UO</title>
+            <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+            <style>.content {padding-top: 80px;}</style>
+    </head>
+ 
+    <body>
+        {%- block topbar -%}
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <h2>
+                        <a href="/" class="brand">SafeRide UO</a>
+                        <small> Developed by students for students </small>
+                        <a href="/request" class="btn">Create new post</a>
+                    </h2>
+                </div>
+                <div class="navbar-collapse">
+                    <ul class="nav nav-pills navbar-nav navbar-right ">
+                        <li>
+                            <a href="/request" class="btn">Create new post</a>
+                        </li>
+                    </ul>
+                </div><!-- /.nav-collapse -->
+            </div>
+        </nav>
+        {%- endblock -%}
+        
+        {% block content %}
+        <div class = "container-fluid">
+            <a href="/request" class="btn">Create new post</a>
+        </div>
+        {% endblock %}
+
+        <div class="container-fluid">
+            <div class="content">
+                {% block page_header %}{% endblock %}
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+        {% block js_footer %}{% endblock %}
+    </body>
+</html>
