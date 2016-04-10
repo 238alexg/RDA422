@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <title>SafeRide Request</title>
+        
+        
+        <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+            
+        <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+                
+                
+    </head>
+    
+    <body>
+        
+        <div class="container">
+            <div class="header">
+                <nav>
+                    <ul class="nav nav-pills pull-right">
+                        <li role="presentation"><a href="/">Home</a>
+                        </li>
+                        <li role="presentation"><a href="/about">About</a>
+                        </li>
+                        <li role="presentation"><a href="/contact">Contact</a>
+                        </li>
+                        <li role="presentation"><a href="/admin">Admin</a>
+                        </li>
+                    </ul>
+                </nav>
+                <h3 class="text-muted">SafeRide UO</h3>
+            </div>
+            
+
+            <!-- Form for riders -->
+            <form id="testform" role="form" action="/buttonPress" method="post">
+                <h3 class="text-muted" style="text-align: center;">Request Info</h3>
+
+
+
+                    <div class="form-group">
+                      <label for="name">Name:</label>
+                      <input type="text" class="form-control" name="usr">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="id">UO ID Number:</label>
+                      <input type="int" class="form-control" name="id">
+                    </div>
+                    <div class="form-group">
+                      <label for="phone">Phone Number:</label>
+                      <input type="int" class="form-control" name="phone">
+                    </div>
+                    <div class="form-group">
+                      <label for="pick_up">Pick-Up Location:</label>
+                      <input type="text" class="form-control" name="pick_up">
+                    </div>
+                    <div class="form-group">
+                      <label for="drop_off">Drop-Off Location:</label>
+                      <input type="text" class="form-control" name="drop_off">
+                    </div>
+                    <div class="form-group">
+                        <label for="count">Hour of Pick-Up:</label>
+                            <select class="form-control" name="hour">
+                                <option>7 PM</option>
+                                <option>8 PM</option>
+                                <option>9 PM</option>
+                                <option>10 PM</option>
+                                <option>11 PM</option>
+                                <option>12 AM</option>
+                                <option>1 AM (Fri/Sat Only)</option>
+                                <option>2 AM (Fri/Sat Only)</option>
+                            </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="count">Minute of Pick-Up:</label>
+                            <select class="form-control" name="min">
+                                <option>00</option>
+                                <option>05</option>
+                                <option>10</option>
+                                <option>15</option>
+                                <option>20</option>
+                                <option>25</option>
+                                <option>30</option>
+                                <option>35</option>
+                                <option>40</option>
+                                <option>45</option>
+                                <option>50</option>
+                                <option>55</option>
+                            </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="count">How Many Riders? (Choose One)</label>
+                            <select class="form-control" name="riders">
+                                <option>Just Me</option>
+                                <option>A Friend and Me</option>
+                                <option>Two Friends and Me</option>
+                            </select>
+                    </div>
+                    <!--
+                    <div class="form-group">
+                        <div class="checkbox">
+                          <label><input type="checkbox" id="bike">Bike?</label>
+                        </div>
+                    </div>
+                -->
+                    <div class="form-group">
+                      <label for="spec">Special Requests:</label>
+                      <textarea class="form-control" rows="3" name="spec" placeholder="Bikes, handicapped, etc."></textarea>
+                    </div>
+                <!-- </form>
+
+                <form id="testform" action="/buttonPress" method="post"> -->
+                    <!-- <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" name="usr" class="form-control">
+                    </div> -->
+                    <div class="form-group">
+                        <div class="text-center">
+                            <button type="submit" form="testform" class="btn btn-success btn-lg">Submit</button>
+                        </div>
+                    </div>
+
+                </form>
+                <!-- end of form -->
+            
+            <footer class="footer">
+                <p>&copy; CIS 422</p>
+            </footer>
+            
+        </div>
+    </body>
+    
+</html>
