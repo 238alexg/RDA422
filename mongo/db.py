@@ -15,9 +15,10 @@ def save_ride(ride):
         ride.save()
         return ride
     elif type(ride) == dict:
-        print("saving the ride dict")
+        print("saving the ride dict", ride)
         r = RideRequest(**ride)
         r.save()
+        print("save successful")
         return r
     else:
         print("Error saving ride", type(ride))
