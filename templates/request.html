@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-    
+
     <head>
         <title>SafeRide Request</title>
-        
-        
+
+
         <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-            
+
         <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
 
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-                
-                
+
+
     </head>
-    
+
     <body>
-        
+
         <div class="container">
             <div class="header">
                 <nav>
@@ -32,7 +32,7 @@
                 </nav>
                 <h3 class="text-muted">SafeRide UO</h3>
             </div>
-            
+
 
             <!-- Form for riders -->
             <form id="testform" role="form" action="/buttonPress" method="post">
@@ -94,9 +94,9 @@
                     <div class="form-group">
                         <label for="count">How Many Riders? (Choose One)</label>
                             <select class="form-control" name="riders">
-                                <option>Just Me</option>
-                                <option>A Friend and Me</option>
-                                <option>Two Friends and Me</option>
+                                <option value=1>Just Me</option>
+                                <option value=2>A Friend and Me</option>
+                                <option value=3>Two Friends and Me</option>
                             </select>
                     </div>
                     <!--
@@ -125,12 +125,12 @@
 
                 </form>
                 <!-- end of form -->
-            
+
             <footer class="footer">
                 <p>&copy; CIS 422</p>
             </footer>
-            
+
         </div>
     </body>
-    
+
 </html>
