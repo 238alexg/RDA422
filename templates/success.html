@@ -12,15 +12,19 @@
                 
     </head>
     
-    <body>
-        
+    <body onload="setTimeout(redirect, 5000)">
+        <script type="text/javascript">
+            function redirect() {
+                window.location.replace(localhost:5000/about);
+            }
+        </script>
         <div class="container">
             <div class="header">
                 <nav>
                     <ul class="nav nav-pills pull-right">
                         <li role="presentation"><a href="/">Home</a>
                         </li>
-                        <li role="presentation"><a href="/about">About</a>
+                        <li role="presentation"><a id="link" href="/about">About</a>
                         </li>
                         <li role="presentation"><a href="/contact">Contact</a>
                         </li>
@@ -28,7 +32,7 @@
                         </li>
                     </ul>
                 </nav>
-                <h3 class="text-muted">SafeRide UO</h3>
+                <h3 class="text-muted"><a style="text-decoration: none" href="/">SafeRide UO</a></h3>
             </div>
             
             <div class="jumbotron">

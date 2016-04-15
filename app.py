@@ -27,7 +27,8 @@ def index():
 
 @app.route("/admin")
 def admin():
-    return render_template('admin.html')
+    rides = get_ride_list()
+    return render_template('admin.html', rides=rides)
 
 @app.route("/contact")
 def contact():
@@ -49,8 +50,8 @@ def buttonPress():
     phone = req.form.get('phone').encode('utf-8')
     pickup = req.form.get('pick_up').encode('utf-8')
     dropoff = req.form.get('drop_off').encode('utf-8')
-    # hour = req.form.get('hour')
-    # minutes = req.form.get('min')
+    hour = req.form.get('hour')
+    minutes = req.form.get('min')
     numRiders = int(req.form.get('riders').encode('utf-8'))
     specRequests = req.form.get('spec').encode('utf-8')
     print(name, type(name))
@@ -63,7 +64,12 @@ def buttonPress():
     print(numRiders, type(numRiders))
     print(specRequests, type(specRequests))
 	# print("unexpected indent")
-    save_ride({"name":name,"uoid":uoid,"pickup_addr":pickup,"pickup_time":datetime.now(),"dropoff_addr":dropoff,"dropoff_time":datetime.now(),"group_size":numRiders,"special":specRequests})
+
+    # Set the pickup time to the one on the form
+    pickup_time = datetime.now()
+    pickup_time.replace(hour=hour, minute=minutes)
+
+    save_ride({"name":name,"uoid":uoid,"pickup_addr":pickup,"pickup_time":pickup_time,"dropoff_addr":dropoff,"group_size":numRiders,"special":specRequests})
     print("saved the ride info")
     return render_template('success.html')
 
