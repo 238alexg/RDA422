@@ -18,7 +18,7 @@
           <td style="padding-left:5px;padding-right:5px">Pickup Location</td>
           <td style="padding-left:5px;padding-right:5px">Pickup Time</td>
           <td style="padding-left:5px;padding-right:5px">Dropoff Location</td>
-          <td style="padding-left:5px;padding-right:5px">Dropoff Time</td>
+      <!--    <td style="padding-left:5px;padding-right:5px">Dropoff Time</td> -->
           <td style="padding-left:5px;padding-right:5px">Special Request</td>
         </tr>
         {% for ride in rides %}
@@ -29,7 +29,7 @@
             <td style="padding-left:5px;padding-right:5px">{{ride.pickup_addr}}</td>
             <td style="padding-left:5px;padding-right:5px">{{ride.pickup_time}}</td>
             <td style="padding-left:5px;padding-right:5px">{{ride.dropoff_addr}}</td>
-            <td style="padding-left:5px;padding-right:5px">{{ride.dropoff_time}}</td>
+       <!--     <td style="padding-left:5px;padding-right:5px">{{ride.dropoff_time}}</td> -->
             <td style="padding-left:5px;padding-right:5px">{{ride.special}}</td>
           </tr>
         {% endfor %}
