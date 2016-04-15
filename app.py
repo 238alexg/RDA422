@@ -3,9 +3,11 @@
 from flask import Flask, render_template, request as req, url_for
 from flask.ext.mongoengine import MongoEngine
 from datetime import datetime
+from werkzeug.contrib.fixers import ProxyFix
 
 
 app = Flask(__name__)
+app.wsgi_app = ProxyFix(app.wsgi_app)
 
 app.config["MONGODB_SETTINGS"] = {'DB': "saferide"}
 app.config["SECRET_KEY"] = "thisisasecret"
