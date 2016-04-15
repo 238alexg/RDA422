@@ -24,6 +24,14 @@ def save_ride(ride):
         print("Error saving ride", type(ride))
         return None
 
+def delete_ride(ride_id):
+    ride = RideRequest.objects(id=ride_id)
+    if ride:
+        ride.delete()
+        return True
+    else:
+        return False
+
 def list_rides():
     for r in RideRequest.objects:
         print r
