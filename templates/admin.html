@@ -3,12 +3,34 @@
     
     <head>
         <title>SafeRide Dispatch</title>
-        
-        
         <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-            
-            <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
-                
+        
+        <style rel='stylesheet' type='text/css'>
+            body {
+                margin: 10px;
+            }
+            table {
+                width: 90%;
+                border-collapse: collapse;
+            }
+            tr:hover {background-color: #f5f5f5}
+            thead { 
+                text-align: left;
+                font-weight: bold;  
+            }
+            tbody td {
+                font-size: 100%;
+                border-bottom: 1px solid #ddd;
+
+            }
+            caption {
+                font-size: 90%;
+                text-align: right;
+            }
+            td, th, caption {
+                padding: 3px;
+            }
+        </style>  
                 
     </head>
     
@@ -28,14 +50,40 @@
                         </li>
                     </ul>
                 </nav>
-                <h3 class="text-muted">SafeRide UO</h3>
+                <h3><a style="text-decoration: none" href="/">SafeRide UO</a></h3>
             </div>
-            
-            <div class="jumbotron">
-                <h1>Admin Page</h1>
-                <p class="lead"></p>
-            </div>
-            
+            <hr>
+            <h3 text-align="center">Requested Rides</h3>
+            <table><tbody>
+                <thead>
+                  <td>UO ID</td>
+                  <td>Name</td>
+                  <td>People</td>
+                  <td colspan="2" align="center">Pickup</td>
+                  <td>Dropoff</td>
+                  <td>Special Request</td>
+                  <td>Delete?</td>
+                </thead>
+
+                {% for ride in rides %}
+                  <tr>
+                    <td>{{ride.uoid}}</td>
+                    <td>{{ride.name}}</td>
+                    <td>{{ride.group_size}}</td>
+                    <td>{{ride.pickup_time.hour}}:{{ride.pickup_time.minute}}</td>
+                    <td>{{ride.pickup_addr}}</td>
+                    <td>{{ride.dropoff_addr}}</td>
+                    <td>{{ride.special}}</td>
+                    <td><button onclick="deleteEntry()" type="button"><img src="file:/RDA422/templates/deleteButton.png"/></button></td>
+                    <script type="text/javascript">
+                        function deleteEntry() {
+
+                        }
+                    </script>
+
+                  </tr>
+                {% endfor %}
+            </tbody></table>
             <footer class="footer">
                 <p>&copy; CIS 422</p>
             </footer>
