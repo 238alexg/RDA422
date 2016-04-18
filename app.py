@@ -45,30 +45,38 @@ def suc():
 def buttonPress():
     print("BUTTON HAS BEEN PRESSED")
     name = req.form.get('usr').encode('utf-8')
-    uoid = int(req.form.get('id').encode('utf-8'))
-    phone = req.form.get('phone').encode('utf-8')
-    pickup = req.form.get('pick_up').encode('utf-8')
-    dropoff = req.form.get('drop_off').encode('utf-8')
-    hour = req.form.get('hour')
-    minutes = req.form.get('min')
-    numRiders = int(req.form.get('riders').encode('utf-8'))
-    specRequests = req.form.get('spec').encode('utf-8')
     print(name, type(name))
+    
+    uoid = int(req.form.get('id').encode('utf-8'))
     print(uoid, type(uoid))
+
+    phone = req.form.get('phone').encode('utf-8')
     print(phone, type(phone))
+
+    pickup = req.form.get('pick_up').encode('utf-8')
     print(pickup, type(pickup))
+
+    dropoff = req.form.get('drop_off').encode('utf-8')
     print(dropoff, type(dropoff))
+
+    # hour = int(req.form.get('hours').encode('utf-8'))
     # print(hour, type(hour))
+
+    # minute = int(req.form.get('minute').encode('utf-8'))
     # print(minutes, type(minutes))
+
+    numRiders = int(req.form.get('riders').encode('utf-8'))
     print(numRiders, type(numRiders))
+
+    specRequests = req.form.get('spec').encode('utf-8')
     print(specRequests, type(specRequests))
 	# print("unexpected indent")
 
     # Set the pickup time to the one on the form
     pickup_time = datetime.now()
-    pickup_time.replace(hour=hour, minute=minutes)
+    #pickup_time.replace(hour=hour, minute=minute)
 
-    save_ride({"name":name,"uoid":uoid,"pickup_addr":pickup,"pickup_time":pickup_time,"dropoff_addr":dropoff,"group_size":numRiders,"special":specRequests})
+    save_ride({"name":name,"uoid":uoid,"pickup_addr":pickup,"pickup_time":datetime.now(),"dropoff_addr":dropoff,"dropoff_time":datetime.now(),"group_size":numRiders,"special":specRequests})
     print("saved the ride info")
     return render_template('success.html')
 
