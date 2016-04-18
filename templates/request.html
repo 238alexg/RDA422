@@ -1,154 +1,110 @@
-<!DOCTYPE html>
-<html lang="en">
-
-    <head>
-        <title>SafeRide Request</title>
+{% extends "base.html" %}
 
 
-        <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+{% block title %}
+<title>SafeRide Request</title>
+<style type="text/css">
+    .container {
+        display: table;
+        width: 60%;
+        height: 60%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+{% endblock %}
 
-        <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+{% block content %}
+<!-- Form for riders -->
+<form id="testform" role="form" action="/buttonPress" method="post">
+    <h3 class="text-muted" style="text-align: center;">Request Info</h3>
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" class="form-control" name="usr">
+    </div>
+    <div class="form-group">
+      <label for="id">UO ID Number:</label>
+      <input type="int" class="form-control" name="id">
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone Number:</label>
+      <input type="int" class="form-control" name="phone">
+    </div>
+    <div class="form-group">
+      <label for="pick_up">Pick-Up Location:</label>
+      <input type="text" class="form-control" name="pick_up">
+    </div>
+    <div class="form-group">
+      <label for="drop_off">Drop-Off Location:</label>
+      <input type="text" class="form-control" name="drop_off">
+    </div>
+    <div class="form-group">
+        <label for="count">Hour of Pick-Up:</label>
+        <select id="hours" class="form-control" name="hour">
+        </select>
+        <script type="text/javascript">
+            // To add current day's time options
+            var date = new Date()
+            var day = date.getDay();
+            var select = document.getElementById('hours');
 
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-
-    </head>
-
-    <body>
-
-        <div class="container">
-            <div class="header">
-                <nav>
-                    <ul class="nav nav-pills pull-right">
-                        <li role="presentation"><a href="/">Home</a>
-                        </li>
-                        <li role="presentation"><a href="/about">About</a>
-                        </li>
-                        <li role="presentation"><a href="/contact">Contact</a>
-                        </li>
-                        <li role="presentation"><a href="/admin">Admin</a>
-                        </li>
-                    </ul>
-                </nav>
-                <h3 class="text-muted"><a style="text-decoration: none" href="/">SafeRide UO</a></h3>
-            </div>
-
-
-            <!-- Form for riders -->
-            <form id="testform" role="form" action="/buttonPress" method="post">
-                <h3 class="text-muted" style="text-align: center;">Request Info</h3>
-
-
-
-                    <div class="form-group">
-                      <label for="name">Name:</label>
-                      <input type="text" class="form-control" name="usr">
-                    </div>
-
-                    <div class="form-group">
-                      <label for="id">UO ID Number:</label>
-                      <input type="int" class="form-control" name="id">
-                    </div>
-                    <div class="form-group">
-                      <label for="phone">Phone Number:</label>
-                      <input type="int" class="form-control" name="phone">
-                    </div>
-                    <div class="form-group">
-                      <label for="pick_up">Pick-Up Location:</label>
-                      <input type="text" class="form-control" name="pick_up">
-                    </div>
-                    <div class="form-group">
-                      <label for="drop_off">Drop-Off Location:</label>
-                      <input type="text" class="form-control" name="drop_off">
-                    </div>
-                    <div class="form-group">
-                        <label for="count">Hour of Pick-Up:</label>
-                            <select id="hours" class="form-control" name="hour">
-                            </select>
-                            <script type="text/javascript">
-                                // To add current day's time options
-                                var date = new Date()
-                                var day = date.getDay();
-                                var select = document.getElementById('hours');
-                                for (var i = 7; i < 11; i++) {
-                                    var opt = document.createElement('option');
-                                    opt.value = i;
-                                    opt.innerHTML = i + " PM";
-                                    select.appendChild(opt);
-                                } 
-                                var opt = document.createElement('option');
-                                    opt.value = 12;
-                                    opt.innerHTML = "12 AM";
-                                    select.appendChild(opt);
-
-                                // If it is the weekend
-                                if (day > 5) {
-                                    for (var i = 1; i < 3; i++) {
-                                        var opt = document.createElement('option');
-                                        opt.value = i;
-                                        opt.innerHTML = i + " AM";
-                                        select.appendChild(opt);
-                                    } 
-                                }
-                            </script>
-                    </div>
-                    <div class="form-group">
-                        <label for="count">Minute of Pick-Up:</label>
-                            <select class="form-control" name="min">
-                                <option value="00">00</option>
-                                <option value="05">05</option>
-                                <option value="10">10</option>
-                                <option value="15">15</option>
-                                <option value="20">20</option>
-                                <option value="25">25</option>
-                                <option value="30">30</option>
-                                <option value="35">35</option>
-                                <option value="40">40</option>
-                                <option value="45">45</option>
-                                <option value="50">50</option>
-                                <option value="55">55</option>
-                            </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="count">How Many Riders? (Choose One)</label>
-                            <select class="form-control" name="riders">
-                                <option value=1>Just Me</option>
-                                <option value=2>A Friend and Me</option>
-                                <option value=3>Two Friends and Me</option>
-                            </select>
-                    </div>
-                    <!--
-                    <div class="form-group">
-                        <div class="checkbox">
-                          <label><input type="checkbox" id="bike">Bike?</label>
-                        </div>
-                    </div>
-                -->
-                    <div class="form-group">
-                      <label for="spec">Special Requests:</label>
-                      <textarea class="form-control" rows="3" name="spec" placeholder="Bikes, handicapped, etc."></textarea>
-                    </div>
-                <!-- </form>
-
-                <form id="testform" action="/buttonPress" method="post"> -->
-                    <!-- <div class="form-group">
-                        <label for="name">Name:</label>
-                        <input type="text" name="usr" class="form-control">
-                    </div> -->
-                    <div class="form-group">
-                        <div class="text-center">
-                            <button type="submit" form="testform" class="btn btn-success btn-lg">Submit</button>
-                        </div>
-                    </div>
-
-                </form>
-                <!-- end of form -->
-
-            <footer class="footer">
-                <p>&copy; CIS 422</p>
-            </footer>
-
+            // Add universal hours
+            for (var i = 7; i < 12; i++) {
+                var opt = document.createElement('option');
+                opt.value = i;
+                opt.innerHTML = i + " PM";
+                select.appendChild(opt);
+            }
+            // Add 12AM ("PM" is in the loop)
+            var opt = document.createElement('option');
+            opt.value = 12;
+            opt.innerHTML = "12 AM";
+            select.appendChild(opt);
+            // If it is the weekend
+            if (day > 5) {
+                for (var i = 1; i < 3; i++) {
+                    var opt = document.createElement('option');
+                    opt.value = i;
+                    opt.innerHTML = i + " AM";
+                    select.appendChild(opt);
+                } 
+            }
+        </script>
+    </div>
+    <div class="form-group">
+        <label for="count">Minute of Pick-Up:</label>
+            <select class="form-control" name="min">
+                <option value="00">00</option>
+                <option value="05">05</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+                <option value="35">35</option>
+                <option value="40">40</option>
+                <option value="45">45</option>
+                <option value="50">50</option>
+                <option value="55">55</option>
+            </select>
+    </div>
+    <div class="form-group">
+        <label for="count">How Many Riders? (Choose One)</label>
+            <select class="form-control" name="riders">
+                <option value=1>Just Me</option>
+                <option value=2>A Friend and Me</option>
+                <option value=3>Two Friends and Me</option>
+            </select>
+    </div>
+    <div class="form-group">
+        <label for="spec">Special Requests:</label>
+        <textarea class="form-control" rows="3" name="spec" placeholder="Bikes, handicapped, etc."></textarea>
+    </div>
+    <div class="form-group">
+        <div class="text-center">
+            <button type="submit" form="testform" class="btn btn-success btn-lg">Submit</button>
         </div>
-    </body>
-
-</html>
+    </div>
+</form>
+<!-- end of form -->
+{% endblock %}

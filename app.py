@@ -14,11 +14,6 @@ app.config["SECRET_KEY"] = "thisisasecret"
 
 from mongo.db import save_ride, get_ride_list
 
-@app.route("/list_rides")
-def list_rides():
-	rides = get_ride_list()
-	return render_template('list_rides.html', rides=rides)
-
 @app.route("/")
 @app.route("/index")
 @app.route("/home")
@@ -41,6 +36,10 @@ def ask():
 @app.route("/about")
 def about():
     return render_template('about.html')
+
+@app.route("/suc")
+def suc():
+    return render_template('success.html')
 
 @app.route('/buttonPress', methods=['POST'])
 def buttonPress():

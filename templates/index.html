@@ -1,77 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-    
-    <head>
-        <title>SafeRide Home</title>
-        
-        
-        <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-        
-        <style>
-            html, body {
-                height: 100%;
-                margin: 0;
-            }
-            #box {
-                display: table;
-                width: 500px;
-                height: 400px;
-                background-color: #CCC;
-                border-radius: 20px;
-                margin-left: auto ;
-                margin-right: auto ;
-            }
-            #boxInside {
-                display: table-cell;
-                width: 70%;
-                height: 70%;
-                margin: 0 auto 0 auto;
-                text-align: center;
-                vertical-align: middle;
-            }
-            .extraSpace {
-                margin-bottom: 60px;
-                font-weight: bold;
-                font-size: 4em;
-            }
-            footer {
-                text-align: center;
-            }
-        </style>
+{% extends "base.html" %}
 
-                
-    </head>
-    
-    <body>
-        
-        <div class="container">
-            <div class="header">
-                <nav>
-                    <ul class="nav nav-pills pull-right">
-                        <li role="presentation"><a href="/">Home</a>
-                        </li>
-                        <li role="presentation"><a href="/about">About</a>
-                        </li>
-                        <li role="presentation"><a href="/contact">Contact</a>
-                        </li>
-                        <li role="presentation"><a href="/admin">Admin</a>
-                        </li>
-                    </ul>
-                </nav>
-                <h3 class="text-muted"><a style="text-decoration: none" href="/">SafeRide UO</a></h3>
-            </div>
-        </div>
+{% block title %}
+<title>Success!</title>
+{% endblock %}
 
-        <div id="box">
-            <div id="boxInside">
-                <p class="extraSpace">Request a Ride!</p>
-                <a class="btn btn-lg btn-success" href="/request" role="button">Request</a>
-            </div>
-        </div>
-
-        <footer margin="auto" class="footer">
-            <p>&copy; CIS 422</p>
-        </footer>
-    </body>
-    
-</html>
+{% block content %}
+<div id="box">
+    <div id="boxInside">
+        <p class="extraSpace">Request a Ride!</p>
+        <a class="btn btn-lg btn-success button" href="/request" role="button">Request</a>
+    </div>
+</div>
+{% endblock %}
