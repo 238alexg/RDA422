@@ -4,6 +4,7 @@ from flask import Flask, render_template, request as req, url_for
 from flask.ext.mongoengine import MongoEngine
 from werkzeug.contrib.fixers import ProxyFix
 from datetime import datetime
+from auth import requires_auth
 
 
 app = Flask(__name__)
@@ -21,6 +22,7 @@ def index():
 	return render_template('index.html')
 
 @app.route("/admin", methods=['GET', 'POST'])
+@requires_auth
 def admin():
     if req.form:
         #Need to delete ride
@@ -85,7 +87,8 @@ def buttonPress():
     updated_time = pick_time.replace(hour=new_hour, minute=new_minute, second=0, microsecond=0)
     #print(updated_time)
     
-    save_ride({"name":name,"uoid":uoid,"pickup_addr":pickup,"pickup_time":updated_time,"dropoff_addr":dropoff,"group_size":numRiders,"special":specRequests})
+    save_ride({"name":name,"phone":phone,"uoid":uoid,"pickup_addr":pickup,"pickup_time":updated_time,"dropoff_addr":dropoff,"group_size":numRiders,"special":specRequests})
+    
     print("saved the ride info")
     return render_template('success.html')
 

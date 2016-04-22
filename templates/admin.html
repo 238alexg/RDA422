@@ -43,8 +43,8 @@
 <table><tbody>
     <thead>
         <td>UO ID</td>
-        <td>Phone</td>
         <td>Name</td><td></td>
+        <td>Phone</td>
         <td>People</td>
         <td colspan="2">Pickup Info</td>
         <td>Dropoff</td>
@@ -55,8 +55,8 @@
     {% for ride in rides %}
     <tr>
         <td>{{ride.uoid}}</td>
-        <td>{{ride.phone}}</td>
         <td colspan="2">{{ride.name}}</td>
+        <td>{{ride.phone}}</td>
         <td>{{ride.group_size}}</td>
         <td>{{ride.pickup_time.hour}}:{{ride.pickup_time.minute}}</td>
         <td>{{ride.pickup_addr}}</td>
