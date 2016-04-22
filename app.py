@@ -66,11 +66,13 @@ def buttonPress():
     dropoff = req.form.get('drop_off').encode('utf-8')
     print(dropoff, type(dropoff))
 
-    # hour = int(req.form.get('hours').encode('utf-8'))
-    # print(hour, type(hour))
+    hour = int(req.form.get('hours').encode('utf-8'))
+    print(hour, type(hour))
 
-    # minute = int(req.form.get('minute').encode('utf-8'))
-    # print(minutes, type(minutes))
+    
+    minute = int(req.form.get('minute').encode('utf-8'))
+    print(minute, type(minute))
+    
 
     numRiders = int(req.form.get('riders').encode('utf-8'))
     print(numRiders, type(numRiders))
@@ -81,7 +83,7 @@ def buttonPress():
 
     # Set the pickup time to the one on the form
     pickup_time = datetime.now()
-    #pickup_time.replace(hour=hour, minute=minute)
+    pickup_time.replace(hour=hour, minute=minute)
 
     save_ride({"name":name,"phone":phone,"uoid":uoid,"pickup_addr":pickup,"pickup_time":datetime.now(),"dropoff_addr":dropoff,"dropoff_time":datetime.now(),"group_size":numRiders,"special":specRequests})
     print("saved the ride info")
