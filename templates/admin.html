@@ -74,6 +74,7 @@
     {% endfor %}
 </tbody></table>
 
+{% if rides %}
 <div>
     <form id="delete_all" action="/admin" method="POST">
         <input
@@ -85,5 +86,5 @@
         <input type="hidden" name="delBut" form="delete_all" value=" "/>
     </form>
 </div>
-
+{% endif %}
 {% endblock %}

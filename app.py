@@ -13,7 +13,7 @@ app.wsgi_app = ProxyFix(app.wsgi_app)
 app.config["MONGODB_SETTINGS"] = {'DB': "saferide"}
 app.config["SECRET_KEY"] = "thisisasecret"
 
-from mongo.db import save_ride, get_ride_list, delete_ride, delete_all
+from mongo.db import save_ride, get_ride_list, delete_ride, delete_all, validate
 
 @app.route("/")
 @app.route("/index")
@@ -34,8 +34,10 @@ def admin():
         delAll = req.form.get("delBut")
         print("Deleting all rides")
         if delAll:
-            delete_all()
-
+            try:
+                delete_all()
+            except BaseException as e:
+                print (e)
     rides = get_ride_list()
     return render_template('admin.html', rides=rides)
 
@@ -97,10 +99,11 @@ def buttonPress():
     updated_time = pick_time.replace(hour=new_hour, minute=new_minute, second=0, microsecond=0)
     #print(updated_time)
     ride = {"name":name,"phone":phone,"uoid":uoid,"pickup_addr":pickup,"pickup_time":updated_time,"dropoff_addr":dropoff,"group_size":numRiders,"special":specRequests}    
+    print("Gonna validate")
     errors = validate(ride)
     if not errors:
-        save_ride(ride)
         print("success, saving ride")
+	save_ride(ride)
         return render_template('success.html') 
     else:
         print("uh oh, errors")
