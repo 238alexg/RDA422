@@ -1,10 +1,10 @@
 from mongoengine import *
 
 class RideRequest(Document):
-    uoid = IntField(min_value=951000000, max_value=951999999,required=True)
+    uoid = IntField(min_value=950000000, max_value=959999999,required=True)
     name = StringField(max_length=100,required=True)
+    phone = StringField(max_length=15,required=True)
     pickup_time = DateTimeField(required=True)
-    dropoff_time = DateTimeField(required=True)
     pickup_addr = StringField(required=True)
     dropoff_addr = StringField(required=True)
     group_size = IntField(min_value=1, max_value=3, required=True)

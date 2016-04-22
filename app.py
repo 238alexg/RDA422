@@ -12,7 +12,7 @@ app.wsgi_app = ProxyFix(app.wsgi_app)
 app.config["MONGODB_SETTINGS"] = {'DB': "saferide"}
 app.config["SECRET_KEY"] = "thisisasecret"
 
-from mongo.db import save_ride, get_ride_list
+from mongo.db import save_ride, get_ride_list, delete_ride
 
 @app.route("/")
 @app.route("/index")
@@ -20,8 +20,15 @@ from mongo.db import save_ride, get_ride_list
 def index():
 	return render_template('index.html')
 
-@app.route("/admin")
+@app.route("/admin", methods=['GET', 'POST'])
 def admin():
+    if req.form:
+        #Need to delete ride
+	ride_id = req.form.get("id")
+        print("Deleting ride with id:", ride_id)
+        if ride_id:
+            delete_ride(ride_id)
+
     rides = get_ride_list()
     return render_template('admin.html', rides=rides)
 
