@@ -73,4 +73,17 @@
     </tr>
     {% endfor %}
 </tbody></table>
+
+<div>
+    <form id="delete_all" action="/admin" method="POST">
+        <input
+            id="delBut"
+            type="submit"
+            value="End of Day"
+            height="20px"
+            form="delete_all" />
+        <input type="hidden" name="delBut" form="delete_all" value=" "/>
+    </form>
+</div>
+
 {% endblock %}
