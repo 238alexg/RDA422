@@ -4,6 +4,7 @@ from flask import Flask, render_template, request as req, url_for
 from flask.ext.mongoengine import MongoEngine
 from werkzeug.contrib.fixers import ProxyFix
 from datetime import datetime
+from auth import requires_auth
 
 
 app = Flask(__name__)
@@ -21,6 +22,7 @@ def index():
 	return render_template('index.html')
 
 @app.route("/admin", methods=['GET', 'POST'])
+@requires_auth
 def admin():
     if req.form:
         #Need to delete ride
