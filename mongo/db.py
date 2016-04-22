@@ -6,8 +6,8 @@ connect('saferide')
 
 
 r = RideRequest(name="Rider", uoid=951000000, pickup_time=datetime.now(),
-                     dropoff_time=datetime.now(), pickup_addr="Some place",
-                     dropoff_addr="Other place", group_size=3)
+                    pickup_addr="Some place",
+                    dropoff_addr="Other place", group_size=3)
 
 def save_ride(ride):
     if type(ride) == RideRequest:
