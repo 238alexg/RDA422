@@ -43,12 +43,8 @@
 <table><tbody>
     <thead>
         <td>UO ID</td>
-<<<<<<< Updated upstream
-        <td>Name</td>
-	<td>Phone</td>
-=======
+        <td>Phone</td>
         <td>Name</td><td></td>
->>>>>>> Stashed changes
         <td>People</td>
         <td colspan="2">Pickup Info</td>
         <td>Dropoff</td>
@@ -59,42 +55,21 @@
     {% for ride in rides %}
     <tr>
         <td>{{ride.uoid}}</td>
-<<<<<<< Updated upstream
-        <td>{{ride.name}}</td>
-	<td>{{ride.phone}}</td>
-=======
+        <td>{{ride.phone}}</td>
         <td colspan="2">{{ride.name}}</td>
->>>>>>> Stashed changes
         <td>{{ride.group_size}}</td>
         <td>{{ride.pickup_time.hour}}:{{ride.pickup_time.minute}}</td>
         <td>{{ride.pickup_addr}}</td>
         <td>{{ride.dropoff_addr}}</td>
-<<<<<<< Updated upstream
-        <td>{{ride.special}}</td>
-        <td><form id="delete_form_{{ride.uoid}}" action="/admin" method="POST" ><input
-=======
         <td colspan="2">{{ride.special}}</td>
-        <td><span><form><input
->>>>>>> Stashed changes
+        <td><form id="delete_form_{{ride.uoid}}" action="/admin" method="POST"><input
             id="deleteButton"
             type="image"
             src="http://icons.iconarchive.com/icons/hopstarter/rounded-square/256/Button-Delete-icon.png"
             height="20px"
-<<<<<<< Updated upstream
-	    form="delete_form_{{ride.uoid}}" />
-	   <input type="hidden" name="id" form="delete_form_{{ride.uoid}}" value="{{ride.id|string}}" /></form> 
+	        form="delete_form_{{ride.uoid}}" />
+	       <input type="hidden" name="id" form="delete_form_{{ride.uoid}}" value="{{ride.id|string}}"/></form>
         </td>
-=======
-            onClick="deleteEntry()"
-            vertical-align: middle; >
-        </form></span></td>
-        <script type="text/javascript">
-            function deleteEntry() {
-                window.alert("DELETED");
-                // DUSTIN: This is where the document deletion should go
-            }
-        </script>
->>>>>>> Stashed changes
     </tr>
     {% endfor %}
 </tbody></table>

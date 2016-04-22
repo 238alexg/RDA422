@@ -12,7 +12,7 @@ app.wsgi_app = ProxyFix(app.wsgi_app)
 app.config["MONGODB_SETTINGS"] = {'DB': "saferide"}
 app.config["SECRET_KEY"] = "thisisasecret"
 
-from mongo.db import save_ride, get_ride_list, delete_ride
+from mongo.db import save_ride, get_ride_list, delete_ride, validate
 
 @app.route("/")
 @app.route("/index")
@@ -22,18 +22,15 @@ def index():
 
 @app.route("/admin", methods=['GET', 'POST'])
 def admin():
-    try:
-        if req.form:
+    if req.form:
         #Need to delete ride
-	    ride_id = req.form.get("id")
-            print("Deleting ride with id:", ride_id)
-            if ride_id:
-                delete_ride(ride_id)
+        ride_id = req.form.get("id")
+        print("Deleting ride with id:", ride_id)
+        if ride_id:
+            delete_ride(ride_id)
 
-        rides = get_ride_list()
-        return render_template('admin.html', rides=rides)
-    except BaseException as E:
-        print(E)
+    rides = get_ride_list()
+    return render_template('admin.html', rides=rides)
 
 @app.route("/contact")
 def contact():
@@ -41,8 +38,10 @@ def contact():
 
 @app.route("/request")
 def ask():
-    return render_template('request.html')
-
+    try:
+        return render_template('request.html',ride={}, errors={})
+    except BaseException as e:
+        print(e)
 @app.route("/about")
 def about():
     return render_template('about.html')
@@ -57,7 +56,10 @@ def buttonPress():
     name = req.form.get('usr').encode('utf-8')
     print(name, type(name))
 
-    uoid = int(req.form.get('id').encode('utf-8'))
+    uoid = req.form.get('id')
+    if uoid:
+        uoid = uoid.encode('utf-8')
+        uoid = int(uoid)
     print(uoid, type(uoid))
 
     phone = req.form.get('phone').encode('utf-8')
@@ -68,7 +70,7 @@ def buttonPress():
 
     dropoff = req.form.get('drop_off').encode('utf-8')
     print(dropoff, type(dropoff))
-
+    
     new_hour = int(req.form.get('hours').encode('utf-8'))
     print(new_hour, type(new_hour))
 
@@ -87,10 +89,17 @@ def buttonPress():
     #print(pick_time)
     updated_time = pick_time.replace(hour=new_hour, minute=new_minute, second=0, microsecond=0)
     #print(updated_time)
-
-    save_ride({"name":name,"uoid":uoid,"pickup_addr":pickup,"pickup_time":updated_time,"dropoff_addr":dropoff,"dropoff_time":datetime.now(),"group_size":numRiders,"special":specRequests})
-    print("saved the ride info")
-    return render_template('success.html')
+    ride = {"name":name,"phone":phone,"uoid":uoid,"pickup_addr":pickup,"pickup_time":updated_time,"dropoff_addr":dropoff,"group_size":numRiders,"special":specRequests}    
+    errors = validate(ride)
+    if not errors:
+        save_ride(ride)
+        print("success, saving ride")
+        return render_template('success.html') 
+    else:
+        print("uh oh, errors")
+        print(errors)
+        return render_template("request.html",ride=ride, errors=errors)
+    
 
 if __name__ == "__main__":
-    app.run(port=7771,host="0.0.0.0")
+    app.run(port=5000,host="0.0.0.0")
