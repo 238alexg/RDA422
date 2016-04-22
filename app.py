@@ -2,8 +2,8 @@
 
 from flask import Flask, render_template, request as req, url_for
 from flask.ext.mongoengine import MongoEngine
-from datetime import datetime
 from werkzeug.contrib.fixers import ProxyFix
+from datetime import datetime
 
 
 app = Flask(__name__)
@@ -46,7 +46,7 @@ def buttonPress():
     print("BUTTON HAS BEEN PRESSED")
     name = req.form.get('usr').encode('utf-8')
     print(name, type(name))
-    
+
     uoid = int(req.form.get('id').encode('utf-8'))
     print(uoid, type(uoid))
 
@@ -59,11 +59,11 @@ def buttonPress():
     dropoff = req.form.get('drop_off').encode('utf-8')
     print(dropoff, type(dropoff))
 
-    # hour = int(req.form.get('hours').encode('utf-8'))
-    # print(hour, type(hour))
+    new_hour = int(req.form.get('hours').encode('utf-8'))
+    print(new_hour, type(new_hour))
 
-    # minute = int(req.form.get('minute').encode('utf-8'))
-    # print(minutes, type(minutes))
+    new_minute = int(req.form.get('minute').encode('utf-8'))
+    print(new_minute, type(new_minute))
 
     numRiders = int(req.form.get('riders').encode('utf-8'))
     print(numRiders, type(numRiders))
@@ -73,12 +73,14 @@ def buttonPress():
 	# print("unexpected indent")
 
     # Set the pickup time to the one on the form
-    pickup_time = datetime.now()
-    #pickup_time.replace(hour=hour, minute=minute)
+    pick_time = datetime.now()
+    #print(pick_time)
+    updated_time = pick_time.replace(hour=new_hour, minute=new_minute, second=0, microsecond=0)
+    #print(updated_time)
 
-    save_ride({"name":name,"uoid":uoid,"pickup_addr":pickup,"pickup_time":datetime.now(),"dropoff_addr":dropoff,"dropoff_time":datetime.now(),"group_size":numRiders,"special":specRequests})
+    save_ride({"name":name,"uoid":uoid,"pickup_addr":pickup,"pickup_time":updated_time,"dropoff_addr":dropoff,"dropoff_time":datetime.now(),"group_size":numRiders,"special":specRequests})
     print("saved the ride info")
     return render_template('success.html')
 
 if __name__ == "__main__":
-	app.run()
+    app.run(port=7771,host="0.0.0.0")
