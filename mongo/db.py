@@ -1,5 +1,5 @@
 from mongoengine import connect
-from models import RideRequest
+from .models import RideRequest
 from datetime import datetime
 import operator
 connect('saferide')
@@ -34,7 +34,7 @@ def delete_ride(ride_id):
 
 def list_rides():
     for r in RideRequest.objects:
-        print r
+        print(r)
 
 def get_ride_list(sort=None):
     return sorted(RideRequest.objects, key=operator.itemgetter(sort if sort else "pickup_time"))
