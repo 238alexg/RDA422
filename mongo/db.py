@@ -32,6 +32,10 @@ def delete_ride(ride_id):
     else:
         return False
 
+def delete_all():
+    RideRequest.delete_all()
+    print("PASS")
+
 def list_rides():
     for r in RideRequest.objects:
         print(r)
