@@ -22,15 +22,18 @@ def index():
 
 @app.route("/admin", methods=['GET', 'POST'])
 def admin():
-    if req.form:
+    try:
+        if req.form:
         #Need to delete ride
-	ride_id = req.form.get("id")
-        print("Deleting ride with id:", ride_id)
-        if ride_id:
-            delete_ride(ride_id)
+	    ride_id = req.form.get("id")
+            print("Deleting ride with id:", ride_id)
+            if ride_id:
+                delete_ride(ride_id)
 
-    rides = get_ride_list()
-    return render_template('admin.html', rides=rides)
+        rides = get_ride_list()
+        return render_template('admin.html', rides=rides)
+    except BaseException as E:
+        print(E)
 
 @app.route("/contact")
 def contact():
