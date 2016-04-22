@@ -58,7 +58,7 @@
         <td colspan="2">{{ride.name}}</td>
         <td>{{ride.phone}}</td>
         <td>{{ride.group_size}}</td>
-        <td>{{ride.pickup_time.hour}}:{{ride.pickup_time.minute}}</td>
+        <td id="time">{{ride.pickup_time.strftime('%H:%M')}}</td>
         <td>{{ride.pickup_addr}}</td>
         <td>{{ride.dropoff_addr}}</td>
         <td colspan="2">{{ride.special}}</td>
