@@ -53,19 +53,14 @@
         <td>{{ride.pickup_addr}}</td>
         <td>{{ride.dropoff_addr}}</td>
         <td>{{ride.special}}</td>
-        <td><form><input
+        <td><form id="delete_form_{{ride.uoid}}" action="/admin" method="POST" ><input
             id="deleteButton"
             type="image"
             src="http://icons.iconarchive.com/icons/hopstarter/rounded-square/256/Button-Delete-icon.png"
             height="20px"
-            onClick="deleteEntry()">
-        </form></td>
-        <script type="text/javascript">
-            function deleteEntry() {
-                window.alert("DELETED");
-                // DUSTIN: This is where the document deletion should go
-            }
-        </script>
+	    form="delete_form_{{ride.uoid}}" />
+	   <input type="hidden" name="id" form="delete_form_{{ride.uoid}}" value="{{ride.id|string}}" /></form> 
+        </td>
     </tr>
     {% endfor %}
 </tbody></table>

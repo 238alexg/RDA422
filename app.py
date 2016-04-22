@@ -12,7 +12,7 @@ app.wsgi_app = ProxyFix(app.wsgi_app)
 app.config["MONGODB_SETTINGS"] = {'DB': "saferide"}
 app.config["SECRET_KEY"] = "thisisasecret"
 
-from mongo.db import save_ride, get_ride_list
+from mongo.db import save_ride, get_ride_list, delete_ride
 
 @app.route("/")
 @app.route("/index")
@@ -20,9 +20,16 @@ from mongo.db import save_ride, get_ride_list
 def index():
 	return render_template('index.html')
 
-@app.route("/admin")
+@app.route("/admin", methods=['GET', 'POST'])
 def admin():
-    rides = get_ride_list()
+    if req.form:
+        #Need to delete ride
+	ride_id = req.form.get("id")
+        print("Deleting ride with id:", ride_id)
+        if ride_id:
+            delete_ride(ride_id)
+
+    rides = get_ride_list()    
     return render_template('admin.html', rides=rides)
 
 @app.route("/contact")
@@ -76,7 +83,7 @@ def buttonPress():
     pickup_time = datetime.now()
     #pickup_time.replace(hour=hour, minute=minute)
 
-    save_ride({"name":name,"uoid":uoid,"pickup_addr":pickup,"pickup_time":datetime.now(),"dropoff_addr":dropoff,"dropoff_time":datetime.now(),"group_size":numRiders,"special":specRequests})
+    save_ride({"name":name,"phone":phone,"uoid":uoid,"pickup_addr":pickup,"pickup_time":datetime.now(),"dropoff_addr":dropoff,"dropoff_time":datetime.now(),"group_size":numRiders,"special":specRequests})
     print("saved the ride info")
     return render_template('success.html')
 
